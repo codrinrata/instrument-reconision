@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrument Classifier</title>
+</head>
+<body>
+    <h1>Instrument Classifier</h1>
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data">
+        <label for="model">Choose a model:</label>
+        <select name="model" id="model">
+            <option value="new" {% if model_name == "new" %}selected{% endif %}>New Model (google training model)</option>
+            <option value="old" {% if model_name == "old" %}selected{% endif %}>Old Model (locally trained)</option>
+        </select>
+        <br><br>
+
+        <label for="image">Upload an image:</label>
+        <input type="file" name="image" id="image" required>
+        <br><br>
+        
+        <button type="submit">Classify Image</button>
+    </form>
+
+    <!-- Display Results -->
+    {% if image_url %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ image_url }}" alt="Uploaded Image" style="max-width: 300px;">
+        <h3>Predicted Label: {{ label }}</h3>
+    {% endif %}
+</body>
+</html>
